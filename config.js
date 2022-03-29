@@ -1,16 +1,14 @@
 const firebase = require("firebase");
-//cambiar
-
 const firebaseConfig = {
-  apiKey: "AIzaSyACYJ5Cm2Y-i7HJes2ET2QW67zvIgLrZeo",
-  authDomain: "tutorial-e06c1.firebaseapp.com",
-  projectId: "tutorial-e06c1",
-  storageBucket: "tutorial-e06c1.appspot.com",
-  messagingSenderId: "863505404334",
-  appId: "1:863505404334:web:132118b0d6acd7dfa3f83f",
-  measurementId: "G-SW2M0FYQG5",
+  apiKey: "AIzaSyBeCIAPzlNkY6JKStoPFNqVNDxGGGWRH-c",
+  authDomain: "supermercado-estrella.firebaseapp.com",
+  projectId: "supermercado-estrella",
+  storageBucket: "supermercado-estrella.appspot.com",
+  messagingSenderId: "84186120355",
+  appId: "1:84186120355:web:0b37c7c534561dc6be7f16",
+  measurementId: "G-7XENZMQY1N"
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-const User = db.collection("Users");
-module.exports = User;
+const Products = db.collection("Products");
+module.exports = Products;
