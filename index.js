@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const Products = require("./config");
+
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 
@@ -17,7 +19,7 @@ app.get("/product", async (req, res) => {
 app.post("/create", async (req, res) => {
   const data = req.body;
   await Products.add(data);
-  res.send({ msg: "Agregado" });
+  res.send({ Result: "Product added Successfully" });
 });
 
 app.post("/update", async (req, res) => {
@@ -27,8 +29,9 @@ app.post("/update", async (req, res) => {
     delete req.body.id_producto;
     const data = req.body;
     await Products.doc(id_producto).update(data);
-    res.send({ msg: "Editado" });
-  } catch (error) {
+    res.send({ Result: "Product updated Successfully" });
+  }
+  catch (error) {
     console.log(error);
   }
 });
@@ -41,10 +44,10 @@ app.post("/delete", async (req, res) => {
     estado: 0,
   };
   await Products.doc(id_producto).update(data);
-  res.send({ msg: "Borrado" });
+  res.send({ Result: "Product deleted Successfully" });
 });
 
-app.post("/activep", async (req, res) => {
+app.post("/active", async (req, res) => {
   const id_producto = req.body.id_producto;
   console.log(req.body.id_producto);
   delete req.body.id_producto;
@@ -52,6 +55,7 @@ app.post("/activep", async (req, res) => {
     estado: 1,
   };
   await Products.doc(id_producto).update(data);
-  res.send({ msg: "activado" });
+  res.send({ Result: "Product actived Successfully" });
 });
-app.listen(4000, () => console.log("Up & RUnning *4000"));
+
+app.listen(4000, () => console.log("Server is running at port 4000"));
