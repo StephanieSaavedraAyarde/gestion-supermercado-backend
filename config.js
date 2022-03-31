@@ -16,4 +16,5 @@ const db = firebase.firestore();
 
 const Products = db.collection("Products");
 
+
 module.exports = Products;
