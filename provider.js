@@ -1,20 +1,15 @@
 const express = require("express");
 const cors = require("cors");
-//const Provedores = require("./config");
-const Provedores = require("./Provedores");
+const Provedores = require("./config_provider.js");
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-//  Datosque debe tener proveddores
+//PROVIDER
 
-
-
-
-//provedores
-app.get("/provedores", async (req, res) => {
+app.get("/provider", async (req, res) => {
   const snapshot = await Provedores.get();
   const list = snapshot.docs.map((doc) => ({
     id_proveedor: doc.id,
@@ -23,33 +18,29 @@ app.get("/provedores", async (req, res) => {
   res.send(list);
 });
 
-
-app.post("/createpro", async (req, res) => {
+app.post("/provider", async (req, res) => {
   const data = req.body;
-  
+
   await Provedores.add(data);
- const datai=req.body.id_proveedor
+  const datai = req.body.id_proveedor;
   res.send({ data });
-  console.log(datai)
+  console.log(datai);
 });
 
-
-app.post("/updatep", async (req, res) => {
+app.put("/provider", async (req, res) => {
   try {
     const id_proveedor = req.body.id_proveedor;
     console.log(req.body.id_proveedor);
     delete req.body.id_proveedor;
     const data = req.body;
     await Provedores.doc(id_proveedor).update(data);
-    res.send({ Result: "Update proveedor" });
-  }
-  catch (error) {
+    res.send({ Result: "Provider updated Successfully" });
+  } catch (error) {
     console.log(error);
   }
 });
 
-
-app.post("/deletep", async (req, res) => {
+app.delete("/provider", async (req, res) => {
   const id_proveedor = req.body.id_proveedor;
   console.log(req.body.id_proveedor);
   delete req.body.id_proveedor;
@@ -57,7 +48,7 @@ app.post("/deletep", async (req, res) => {
     estate: 0,
   };
   await Provedores.doc(id_proveedor).update(data);
-  res.send({ Result: "Product deleted Successfully" });
+  res.send({ Result: "Provider deleted Successfully" });
 });
 
-app.listen(4001, () => console.log("Server is running at port 4000"));
+app.listen(4001, () => console.log("Provider Server is running at port 4001 ✅"));
