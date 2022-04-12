@@ -25,13 +25,16 @@ app.post("/clienteA", async (req, res) => {
 
 // tener cliente por ci AUN TRABAJANDO
 app.get("/clienteCi", async (req, res) => {
-    const id_cliente = req.body.id_cliente;
-    await Cliente.get(id_cliente);
-    const list = snapshot.docs.map((doc) => ({
-        id_cliente: doc.id,
-        ...doc.data(),
-      }));
-      res.send(list);
+    const cedulaI = req.body.cedulaI;
+
+    const querySnapshot = await Cliente.where('cedulaI', '==', cedulaI).get();
+    querySnapshot.forEach((doc) => {
+     // console.log(doc.id, ' => ', doc.data());
+      res.send( doc.data());
+    });
+    
+    
+      
   });
 
 //Editado
