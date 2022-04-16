@@ -31,12 +31,12 @@ app.get("/clienteCi", async (req, res) => {
     const data = await Cliente.where('cedulaI', '==', cedulaI).get();
     data.forEach((doc) => {
       // console.log(doc.id, ' => ', doc.data());
-       res.send( doc.data());
+      res.status(200).send( doc.data());
      });
   
     if(!data.exists){
       
-      res.send({ Result: "Cliente no encontrado" });
+      res.status(400).send({ Result: "Cliente no encontrado" });
     
     }
   } catch (error) {
