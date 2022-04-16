@@ -23,15 +23,29 @@ app.post("/clienteA", async (req, res) => {
   res.send({ Result: "Cliente agregado" });
 });
 
-// tener cliente por ci AUN TRABAJANDO
+// tener cliente por ci 
 app.get("/clienteCi", async (req, res) => {
+  try {
     const cedulaI = req.body.cedulaI;
-
-    const querySnapshot = await Cliente.where('cedulaI', '==', cedulaI).get();
-    querySnapshot.forEach((doc) => {
-     // console.log(doc.id, ' => ', doc.data());
-      res.send( doc.data());
-    });
+   
+    const data = await Cliente.where('cedulaI', '==', cedulaI).get();
+    data.forEach((doc) => {
+      // console.log(doc.id, ' => ', doc.data());
+       res.send( doc.data());
+     });
+  
+    if(!data.exists){
+      
+      res.send({ Result: "Cliente no encontrado" });
+    
+    }
+  } catch (error) {
+    
+    
+  }
+   
+   
+   
     
     
       
@@ -56,4 +70,4 @@ app.post("/clienteU", async (req, res) => {
 
 
 
-app.listen(4002, () => console.log("Server is running at port 4003"));
+app.listen(4002, () => console.log("Server is running at port 4002"));
