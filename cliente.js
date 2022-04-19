@@ -29,7 +29,6 @@ app.get("/clienteCi", async (req, res) => {
   try {
     const cedulaI = req.body.cedulaI;
     const data = await Cliente.where('cedulaI', '==', cedulaI).get();
-<<<<<<< HEAD
     // data.forEach((doc) => {
       
     //    console.log(doc.id, ' => ', doc.data());
@@ -41,12 +40,6 @@ app.get("/clienteCi", async (req, res) => {
       ...doc.data(),
     }));
     res.send(list);
-=======
-    data.forEach((doc) => {
-      res.status(200).send( doc.data());
-     });
-  
->>>>>>> ddbed8efd4e5ffa13dbe0bd77d112e311e180651
     if(!data.exists){
       res.status(400).send({ Result: "Cliente no encontrado" });
     }
