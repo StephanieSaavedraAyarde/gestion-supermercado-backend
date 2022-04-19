@@ -2,11 +2,11 @@ const express = require("express");
 const cors = require("cors");
 const Cliente = require("./config_cliente");
 
-
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+
 // Tener lista de clientes
 app.get("/clienteG", async (req, res) => {
   const snapshot = await Cliente.get();
@@ -16,6 +16,7 @@ app.get("/clienteG", async (req, res) => {
   }));
   res.send(list);
 });
+
 // Agregar cliente
 app.post("/clienteA", async (req, res) => {
   const data = req.body;
@@ -27,8 +28,8 @@ app.post("/clienteA", async (req, res) => {
 app.get("/clienteCi", async (req, res) => {
   try {
     const cedulaI = req.body.cedulaI;
-   
     const data = await Cliente.where('cedulaI', '==', cedulaI).get();
+<<<<<<< HEAD
     // data.forEach((doc) => {
       
     //    console.log(doc.id, ' => ', doc.data());
@@ -40,22 +41,17 @@ app.get("/clienteCi", async (req, res) => {
       ...doc.data(),
     }));
     res.send(list);
+=======
+    data.forEach((doc) => {
+      res.status(200).send( doc.data());
+     });
+  
+>>>>>>> ddbed8efd4e5ffa13dbe0bd77d112e311e180651
     if(!data.exists){
-      
       res.status(400).send({ Result: "Cliente no encontrado" });
-    
     }
-  } catch (error) {
-    
-    
-  }
-   
-   
-   
-    
-    
-      
-  });
+  } catch (error) {}      
+});
 
 //Editado
 app.post("/clienteU", async (req, res) => {
@@ -71,9 +67,6 @@ app.post("/clienteU", async (req, res) => {
     console.log(error);
   }
 });
-
-
-
 
 
 app.listen(4002, () => console.log("Server is running at port 4002"));
