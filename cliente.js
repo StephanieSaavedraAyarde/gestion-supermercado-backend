@@ -16,6 +16,7 @@ app.get("/clienteG", async (req, res) => {
   }));
   res.send(list);
 });
+
 // Agregar cliente
 app.post("/clienteA", async (req, res) => {
   const data = req.body;
@@ -29,12 +30,8 @@ app.get("/clienteCi", async (req, res) => {
 
     const querySnapshot = await Cliente.where('cedulaI', '==', cedulaI).get();
     querySnapshot.forEach((doc) => {
-     // console.log(doc.id, ' => ', doc.data());
       res.send( doc.data());
-    });
-    
-    
-      
+    });     
   });
 
 //Editado
@@ -51,9 +48,5 @@ app.post("/clienteU", async (req, res) => {
     console.log(error);
   }
 });
-
-
-
-
 
 app.listen(4002, () => console.log("Server is running at port 4003"));
