@@ -28,23 +28,22 @@ app.post("/create", async (req, res) => {
   const total = req.body.total;
 
   try {
-    if(cupon != null){
-      const cupones = await Cupones.where('id', '==', cupon).get();
-      cupones.forEach((cupon) => {
-        cupon.estado = 0;
-        total = total - cupones.descuento;
-        res.status(200).send( cupon.cupones());
-       });
+    // if(cupon != null){
+    //   const cupones = await Cupones.where('id', '==', cupon).get();
+    //   cupones.forEach((cupon) => {
+    //     cupon.estado = 0;
+    //     total = total - cupones.descuento;
+    //     res.status(200).send( cupon.cupones());
+    //    });
     
-      if(!cupones.exists){
-        res.status(400).send({ Result: "Cupon no encontrado" });
-      }
-    }
+    //   if(!cupones.exists){
+    //     res.status(400).send({ Result: "Cupon no encontrado" });
+    //   }
+    // }
 
     const productos = await Productos.where('id', '==', id).get();
     productos.forEach((prod) => {
-      prod.stock = prod.stock - cantidad;
-      res.status(200).send( prod.productos());
+      prod.stock = prod.stock - prod.cantidad;
      });
   
     if(!productos.exists){
