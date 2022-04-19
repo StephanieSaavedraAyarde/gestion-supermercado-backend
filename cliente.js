@@ -25,7 +25,7 @@ app.post("/clienteA", async (req, res) => {
 });
 
 // tener cliente por ci 
-app.get("/clienteCi", async (req, res) => {
+app.post("/clienteCi", async (req, res) => {
   try {
     const cedulaI = req.body.cedulaI;
     const data = await Cliente.where('cedulaI', '==', cedulaI).get();
@@ -41,7 +41,7 @@ app.get("/clienteCi", async (req, res) => {
     }));
     res.send(list);
     if(!data.exists){
-      res.status(400).send({ Result: "Cliente no encontrado" });
+      res.status(400).send({ cedulaI: "null" });
     }
   } catch (error) {}      
 });
