@@ -29,11 +29,17 @@ app.get("/clienteCi", async (req, res) => {
     const cedulaI = req.body.cedulaI;
    
     const data = await Cliente.where('cedulaI', '==', cedulaI).get();
-    data.forEach((doc) => {
-      // console.log(doc.id, ' => ', doc.data());
-      res.status(200).send( doc.data());
-     });
-  
+    // data.forEach((doc) => {
+      
+    //    console.log(doc.id, ' => ', doc.data());
+
+    //   res.status(200).send( doc.data());
+    //  });
+    const list = data .docs.map((doc) => ({
+      id_cliente: doc.id,
+      ...doc.data(),
+    }));
+    res.send(list);
     if(!data.exists){
       
       res.status(400).send({ Result: "Cliente no encontrado" });
