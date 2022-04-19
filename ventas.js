@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const Ventas = require("./config_ventas");
+const Productos = require("./config_productos");
+const Cupones = require("./config_cupones");
 
 const app = express();
 
@@ -17,9 +19,41 @@ app.get("/ventas", async (req, res) => {
 });
 
 app.post("/create", async (req, res) => {
+  const id = [];
+  id = req.body.productos.id;
+  const cantidad = [];
+  cantidad = req.body.productos.cantidad;
   const data = req.body;
-  await Ventas.add(data);
-  res.send({ Result: "Added Successfully" });
+  const cupon = req.body.idCupon;
+  const total = req.body.total;
+
+  try {
+    if(cupon != null){
+      const cupones = await Cupones.where('id', '==', cupon).get();
+      cupones.forEach((cupon) => {
+        cupon.estado = 0;
+        total = total - cupones.descuento;
+        res.status(200).send( cupon.cupones());
+       });
+    
+      if(!cupones.exists){
+        res.status(400).send({ Result: "Cupon no encontrado" });
+      }
+    }
+
+    const productos = await Productos.where('id', '==', id).get();
+    productos.forEach((prod) => {
+      prod.stock = prod.stock - cantidad;
+      res.status(200).send( prod.productos());
+     });
+  
+    if(!productos.exists){
+      res.status(400).send({ Result: "Producto no encontrado" });
+    }else{
+      await Ventas.add(data);
+      res.send({ Result: "Added Successfully" });
+    }
+  } catch (error) {} 
 });
 
 app.post("/update", async (req, res) => {
