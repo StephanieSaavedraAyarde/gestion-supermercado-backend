@@ -22,27 +22,33 @@ app.get("/ventas", async (req, res) => {
   res.send(list);
 });
 
-app.post("/ventas", async (req, res) => {
-  const id  = req.body.productos.id;
-  const cantidad = [];
-  cantidad = req.body.productos.cantidad;
-  const data = req.body;
-  const cupon = req.body.idCupon;
-  const total = req.body.total;
+// app.post("/ventas", async (req, res) => {
+//   // let id  = req.body.productos.id;
+//   // let cantidad = [];
+//   // cantidad = req.body.productos.cantidad;
+//   let data = req.body;
+//   // let cupon = req.body.idCupon;
+//   let total = req.body.total;
 
-  try {
-    const productos = await Products.where('id', '==', id).get();
-    productos.forEach((prod) => {
-      prod.stock = prod.stock - prod.cantidad;
-     });
+//   try {
+//     const productos = await Products.where('id', '==', id).get();
+//     productos.forEach((prod) => {
+//       prod.stock = prod.stock - prod.cantidad;
+//      });
   
-    if(!productos.exists){
-      res.status(400).send({ Result: "Producto no encontrado" });
-    }else{
-      await Ventas.add(data);
-      res.send({ Result: "Added Successfully" });
-    }
-  } catch (error) {} 
+//     if(!productos.exists){
+//       res.status(400).send({ Result: "Producto no encontrado" });
+//     }else{
+//       await Ventas.add(data);
+//       res.send({ Result: "Added Successfully" });
+//     }
+//   } catch (error) {} 
+// });
+
+app.post("/venta", async (req, res) => {
+  let data = req.body;
+  await Ventas.add(data);
+  res.send({ Result: "venta Registrada" });
 });
 
 app.put("/ventas", async (req, res) => {
@@ -60,10 +66,10 @@ app.put("/ventas", async (req, res) => {
 });
 
 app.delete("/ventas", async (req, res) => {
-  const id_venta = req.body.id_venta;
+  let id_venta = req.body.id_venta;
   console.log(req.body.id_venta);
   delete req.body.id_venta;
-  const data = {
+  let data = {
     estado: 0,
   };
   await Ventas.doc(id_venta).update(data);
