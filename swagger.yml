@@ -424,7 +424,7 @@ definitions:
         format: "date"
         description: "Fecha de vencimiento del producto"
 
-  Proveedor:
+  Provider:
     type: "object"
     properties:
       id_proveedor:
@@ -449,7 +449,7 @@ definitions:
         type: "integer"
         description: "Estado de activo y desactivado"  
   
-  Usuario: 
+  User: 
     type: "object"
     properties:
       uid_usuario:
@@ -472,15 +472,15 @@ definitions:
     properties:
       id_ventas:
         type: "string"
-        description: "Identificador del usuario"
-      identificador:
+        description: "Identificador de la venta"
+      ci_cliente:
         type: "string"
-        description: "Identificador del usuarios"
-      fecha_creacion:
-        type: "string"
-        format: "date-time"
-        description: "Fecha de Creacion"
-      fecha_acceso:
-        type: "string"
-        format: "date-time"
-        description: "Fecha de Acceso"
+        description: "Identificador de cliente para linkear módulos"
+      productos:
+        type: "array"
+        description: "Array de Productos vendidos"
+      total:
+        type: "number"
+        description: "Monto total de la venta"
+
+      
