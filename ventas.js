@@ -18,8 +18,7 @@ app.get("/ventas", async (req, res) => {
 });
 
 app.post("/ventas", async (req, res) => {
-  const id = [];
-  id = req.body.productos.id;
+  const id  = req.body.productos.id;
   const cantidad = [];
   cantidad = req.body.productos.cantidad;
   const data = req.body;
