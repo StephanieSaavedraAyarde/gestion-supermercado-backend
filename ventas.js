@@ -45,6 +45,7 @@ app.get("/ventas", async (req, res) => {
 //   } catch (error) {} 
 // });
 
+// Ventas sin actualizar stock
 app.post("/venta", async (req, res) => {
   let data = req.body;
   await Ventas.add(data);
