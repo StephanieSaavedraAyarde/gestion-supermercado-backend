@@ -1,8 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const Ventas = require("./config_ventas");
-const Productos = require("./config_productos");
-const Cupones = require("./config_cupones");
+const Ventas = require("./config");
+const Products = require("./config");
 
 const app = express();
 
@@ -18,7 +17,7 @@ app.get("/ventas", async (req, res) => {
   res.send(list);
 });
 
-app.post("/create", async (req, res) => {
+app.post("/ventas/create", async (req, res) => {
   const id = [];
   id = req.body.productos.id;
   const cantidad = [];
@@ -28,20 +27,7 @@ app.post("/create", async (req, res) => {
   const total = req.body.total;
 
   try {
-    // if(cupon != null){
-    //   const cupones = await Cupones.where('id', '==', cupon).get();
-    //   cupones.forEach((cupon) => {
-    //     cupon.estado = 0;
-    //     total = total - cupones.descuento;
-    //     res.status(200).send( cupon.cupones());
-    //    });
-    
-    //   if(!cupones.exists){
-    //     res.status(400).send({ Result: "Cupon no encontrado" });
-    //   }
-    // }
-
-    const productos = await Productos.where('id', '==', id).get();
+    const productos = await Products.where('id', '==', id).get();
     productos.forEach((prod) => {
       prod.stock = prod.stock - prod.cantidad;
      });
@@ -55,7 +41,7 @@ app.post("/create", async (req, res) => {
   } catch (error) {} 
 });
 
-app.post("/update", async (req, res) => {
+app.post("/ventas/update", async (req, res) => {
   try {
     const id_venta = req.body.id_venta;
     console.log(req.body.id_venta);
@@ -69,7 +55,7 @@ app.post("/update", async (req, res) => {
   }
 });
 
-app.post("/delete", async (req, res) => {
+app.post("/ventas/delete", async (req, res) => {
   const id_venta = req.body.id_venta;
   console.log(req.body.id_venta);
   delete req.body.id_venta;
@@ -80,4 +66,4 @@ app.post("/delete", async (req, res) => {
   res.send({ Result: "Deleted Successfully" });
 });
 
-app.listen(4000, () => console.log("Server is running at port 4000"));
+app.listen(4004, () => console.log("Server is running at port 4004"));

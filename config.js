@@ -14,7 +14,12 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-const Products = db.collection("Ventas");
+const Products = db.collection("Products");
+const Ventas = db.collection("Ventas");
+const Provedores = db.collection("Provider");
+const Cliente = db.collection("Cliente");
 
-
+module.exports = Cliente;
+module.exports = Provedores;
+module.exports = Ventas;
 module.exports = Products;
