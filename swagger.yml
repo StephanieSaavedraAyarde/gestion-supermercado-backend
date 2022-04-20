@@ -8,17 +8,244 @@ basePath: "/v1"
 paths:
 
 # Client Swagger
+/clienteG:
+    get:
+      tags:
+      - "user"
+      summary: "Obtener todos los clientes"
+      description: "Tener la informacion de todos los clientes"
+      operationId: "getUsersList"
+      responses:
+        200:
+          description: "Successful request - Retrieving Customer List"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Customer"
+/clienteA:  
+    post:
+      tags:
+      - "Customer"
+      summary: "Create new Customer"
+      description: "This can only be done by the logged into the system."
+      operationId: "createCustomer"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created Customer object"
+        required: true
+        schema:
+          $ref: "#/definitions/Customer"
+      responses:
+        200:
+          description: "Successful request - User added"
+        405:
+          description: "Error while trying to add user"   
+/Customer/clienteCi:
+    get:
+      tags:
+      - "Customer"
+      summary: Get Customer info by Id
+      operationId: "getCustomerInfo"
+      parameters:
+      
+      - in: "body"
+        name: "body"
+        description: "get Customer object by id"
+        required: true
+        schema:
+          $ref: "#/definitions/Customer"
+      responses:
+        200:
+          description: "Successful Request"
+          schema:
+            $ref: "#/definitions/User"
+        404:
+          description: "Error - User Does Not Exist"
+/clienteU :
+    put:
+      tags:
+      - "Customer"
+      summary: "Update User"
+  
+      description: "Allows you to update one of the following fields in an user. One should be updated at a time"
+      operationId: "updateUser"
+      
+      parameters:
+      - in: "path"
+        name: "userId"
+        description: "ID ofuser to be updated"
+        type: "integer"
+        format: "int32"
+        required: true
+            
+      - in: "query"
+        name: "field"
+        description: "field to be updated"
+        type: "string" 
+        required: true
+        
+      - in: "query"
+        name: "value"
+        description: "New value of the previous field"
+        type: "string"
+        required: true
+      
+      responses:
+        200:
+          description: "Successful Request - User Updated"
+        404:
+          description: "Error - User Does Not Exist"
+
 
 # Product Swagger
+/product:
+    get:
+      tags:
+      - "Product"
+      summary: "Obtener todos los productos"
+      description: "Tener la informacion de todos los productos"
+      operationId: "getProductsList"
+      responses:
+        200:
+          description: "Successful request - Retrieving Product List"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+  
+    post:
+      tags:
+      - "Product"
+      summary: "Create new Product"
+      description: "This can only be done by the logged into the system."
+      operationId: "createProduct"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created Product object"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      responses:
+        200:
+          description: "Successful request - User added"
+        405:
+          description: "Error while trying to add user"   
 
+    put:
+      tags:
+      - "Product"
+      summary: "Product User"
+  
+      description: "Allows you to update one of the following fields in an Product. One should be updated at a time"
+      operationId: "updateUser"
+      
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Update Product object"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      responses:
+        200:
+          description: "Successful request - User added"
+        405:
+          description: "Error while trying to add user"  
+
+    delete:
+        tags:
+        - "Product"
+        summary: "Delete a Product"
+        description: "Delete a Product indicating his ID"
+        operationId: "deleteProduct"
+        produces:
+        - "application/json"
+        parameters:
+        - in: "body"
+          name: "body"
+          description: "Update Product object"
+          required: true
+          schema:
+            $ref: "#/definitions/Product"
+        responses:
+          200:
+            description: "Successful request - Product added"
+          405:
+            description: "Error while trying to add Product"  
 # Provides Swagger
+/provider:
+    get:
+      tags:
+      - "Provider"
+      summary: "Obtener todos los Provider"
+      description: "Tener la informacion de todos los Provider"
+      operationId: "getProvidersList"
+      responses:
+        200:
+          description: "Successful request - Retrieving Provider List"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Provider"
+
+    post:
+      tags:
+      - "Provider"
+      summary: "Create new Provider"
+      description: "This can only be done by the logged into the system."
+      operationId: "createProvider"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created Provider object"
+        required: true
+        schema:
+          $ref: "#/definitions/Provider"
+      responses:
+        200:
+          description: "Successful request - Provideradded"
+        405:
+          description: "Error while trying to add Provider"   
+
+    put:
+      tags:
+      - "Provider"
+      summary: "Provider User"
+  
+      description: "Allows you to update one of the following fields in an Product. One should be updated at a time"
+      operationId: "updateProvider"
+      
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Update Provider object"
+        required: true
+        schema:
+          $ref: "#/definitions/Provider"
+      responses:
+        200:
+          description: "Successful request - User added"
+        405:
+          description: "Error while trying to add user"  
 
 # Shopping Swagger
 
 # Sales Swagger
   
 # Coupons Swagger
-  /coupon:
+/coupon:
     get:
       tags:
       - "coupons"
@@ -54,7 +281,7 @@ paths:
         405:
           description: "Error while trying to add Coupon"    
   
-  /coupons/{couponId}:
+/coupons/{couponId}:
     get:
       tags:
       - "coupons"
@@ -131,7 +358,7 @@ paths:
           description: "Error - Coupon Does Not Exist"
 
 # User Swagger
-  /user:
+/user:
     get:
       tags:
       - "user"
@@ -167,7 +394,7 @@ paths:
         405:
           description: "Error while trying to add user"    
   
-  /user/{userId}:
+/user/{userId}:
     get:
       tags:
       - "user"
@@ -243,7 +470,7 @@ paths:
         404:
           description: "Error - User Does Not Exist"
 
-  /user/login:
+/user/login:
     get:
       tags:
       - "user"
@@ -279,7 +506,7 @@ paths:
         "400":
           description: "Invalid username/password"
   
-  /user/logout:
+/user/logout:
     get:
       tags:
       - "user"
@@ -388,7 +615,7 @@ definitions:
         format: "date"
         description: "Fecha de vencimiento del producto"
 
-  Provvider:
+  Provider:
     type: "object"
     properties:
       id_proveedor:
@@ -479,8 +706,8 @@ definitions:
 
 
 # Swagger To Do
-    # CLIENTES    -->   Modelo:✅ | Endpoints:
-    # PRODUCTOS   -->   Modelo:✅ | Endpoints:
+    # CLIENTES    -->   Modelo:✅ | Endpoints:✅
+    # PRODUCTOS   -->   Modelo:✅ | Endpoints:✅
     # PROVEEDORES -->   Modelo:✅ | Endpoints:
     # COMPRAS     -->   Modelo: - | Endpoints:
     # VENTAS      -->   Modelo:✅ | Endpoints:
