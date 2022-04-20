@@ -45,7 +45,7 @@ app.delete("/provider", async (req, res) => {
   console.log(req.body.id_proveedor);
   delete req.body.id_proveedor;
   const data = {
-    estate: 0,
+    state: 0,
   };
   await Provedores.doc(id_proveedor).update(data);
   res.send({ Result: "Provider deleted Successfully" });
