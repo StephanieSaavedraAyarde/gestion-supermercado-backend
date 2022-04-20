@@ -8,7 +8,7 @@ basePath: "/v1"
 paths:
 
 # Client Swagger
-/clienteG:
+  /clienteG:
     get:
       tags:
       - "user"
@@ -22,7 +22,7 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Customer"
-/clienteA:  
+  /clienteA:  
     post:
       tags:
       - "Customer"
@@ -43,7 +43,7 @@ paths:
           description: "Successful request - User added"
         405:
           description: "Error while trying to add user"   
-/Customer/clienteCi:
+  /Customer/clienteCi:
     get:
       tags:
       - "Customer"
@@ -64,7 +64,7 @@ paths:
             $ref: "#/definitions/User"
         404:
           description: "Error - User Does Not Exist"
-/clienteU :
+  /clienteU :
     put:
       tags:
       - "Customer"
@@ -98,10 +98,8 @@ paths:
           description: "Successful Request - User Updated"
         404:
           description: "Error - User Does Not Exist"
-
-
 # Product Swagger
-/product:
+  /product:
     get:
       tags:
       - "Product"
@@ -181,7 +179,7 @@ paths:
           405:
             description: "Error while trying to add Product"  
 # Provides Swagger
-/provider:
+  /provider:
     get:
       tags:
       - "Provider"
@@ -240,125 +238,10 @@ paths:
         405:
           description: "Error while trying to add user"  
 
-# Shopping Swagger
 
-# Sales Swagger
-  
-# Coupons Swagger
-/coupon:
-    get:
-      tags:
-      - "coupons"
-      summary: "Get All Coupons"
-      description: "Gets all currently registered Coupons"
-      operationId: "getCouponsList"
-      responses:
-        200:
-          description: "Successful request - Retrieving Coupons List"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Coupon"
-    
-    post:
-      tags:
-      - "coupons"
-      summary: "Create new user"
-      description: "This can only be done by the logged into the system."
-      operationId: "createUser"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Created coupon object"
-        required: true
-        schema:
-          $ref: "#/definitions/Coupon"
-      responses:
-        200:
-          description: "Successful request - Coupon added"
-        405:
-          description: "Error while trying to add Coupon"    
-  
-/coupons/{couponId}:
-    get:
-      tags:
-      - "coupons"
-      summary: Get coupon info by Id
-      operationId: "getCouponInfo"
-      parameters:
-      
-      - in: "path"
-        name: "userId"
-        type: "integer"
-        format: "int32"
-        required: true
-      
-      responses:
-        200:
-          description: "Successful Request"
-          schema:
-            $ref: "#/definitions/Coupon"
-        404:
-          description: "Error - User Does Not Exist"
-   
-    put:
-      tags:
-      - "coupons"
-      summary: "Update a Coupon"
-  
-      description: "Allows you to update one of the following fields in a coupons. One should be updated at a time"
-      operationId: "updateCoupon"
-      
-      parameters:
-      - in: "path"
-        name: "userId"
-        description: "ID ofuser to be updated"
-        type: "integer"
-        format: "int32"
-        required: true
-            
-      - in: "query"
-        name: "field"
-        description: "field to be updated"
-        type: "string" 
-        required: true
-        
-      - in: "query"
-        name: "value"
-        description: "New value of the previous field"
-        type: "string"
-        required: true
-      
-      responses:
-        200:
-          description: "Successful Request - Coupon Updated"
-        404:
-          description: "Error - Coupon Does Not Exist"
-      
-    delete:
-      tags:
-      - "coupons"
-      summary: "Delete a coupon"
-      description: "Delete a coupon indicating his ID"
-      operationId: "deleteCoupons"
-      
-      parameters:
-      - in: "path"
-        name: "userId"
-        type: "integer"
-        format: "int32"
-        required: true
-        
-      responses:
-        200:
-          description: "Successful Request - Coupon Deleted"
-        404:
-          description: "Error - Coupon Does Not Exist"
 
 # User Swagger
-/user:
+  /user:
     get:
       tags:
       - "user"
@@ -394,7 +277,7 @@ paths:
         405:
           description: "Error while trying to add user"    
   
-/user/{userId}:
+  /user/{userId}:
     get:
       tags:
       - "user"
@@ -470,7 +353,7 @@ paths:
         404:
           description: "Error - User Does Not Exist"
 
-/user/login:
+  /user/login:
     get:
       tags:
       - "user"
@@ -506,7 +389,7 @@ paths:
         "400":
           description: "Invalid username/password"
   
-/user/logout:
+  /user/logout:
     get:
       tags:
       - "user"
@@ -681,34 +564,13 @@ definitions:
         format: "date"
         description: "Fecha de la venta"
 
-  Coupon: 
-    type: "object"
-    properties:
-      id_cupon:
-        type: "string"
-        description: "Identificador del cupon"
-      nombre:
-        type: "string"
-        description: "Nombre al cual se atribuye el cupon"
-      porcentaje:
-        type: "integer"
-        description: "Porcentaje a descontar del monto total"
-      cantidad:
-        type: "integer"
-        description: "Cantidad de coupones con estas caracterisiticas"
-      fecha_límite:
-        type: "integer"
-        format: "date"
-        description: "Fecha de vencimiento del cupon"
-      estado:
-        type: "integer"
-        description: "Estado de activo e inactivo" 
+
 
 
 # Swagger To Do
     # CLIENTES    -->   Modelo:✅ | Endpoints:✅
     # PRODUCTOS   -->   Modelo:✅ | Endpoints:✅
-    # PROVEEDORES -->   Modelo:✅ | Endpoints:
+    # PROVEEDORES -->   Modelo:✅ | Endpoints:✅
     # COMPRAS     -->   Modelo: - | Endpoints:
     # VENTAS      -->   Modelo:✅ | Endpoints:
     # CUPONES     -->   Modelo:✅ | Endpoints:✅
