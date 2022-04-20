@@ -17,7 +17,7 @@ app.get("/ventas", async (req, res) => {
   res.send(list);
 });
 
-app.post("/ventas/create", async (req, res) => {
+app.post("/ventas", async (req, res) => {
   const id = [];
   id = req.body.productos.id;
   const cantidad = [];
@@ -41,7 +41,7 @@ app.post("/ventas/create", async (req, res) => {
   } catch (error) {} 
 });
 
-app.post("/ventas/update", async (req, res) => {
+app.put("/ventas", async (req, res) => {
   try {
     const id_venta = req.body.id_venta;
     console.log(req.body.id_venta);
@@ -55,7 +55,7 @@ app.post("/ventas/update", async (req, res) => {
   }
 });
 
-app.post("/ventas/delete", async (req, res) => {
+app.delete("/ventas", async (req, res) => {
   const id_venta = req.body.id_venta;
   console.log(req.body.id_venta);
   delete req.body.id_venta;
