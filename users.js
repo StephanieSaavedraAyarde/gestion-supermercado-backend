@@ -24,16 +24,16 @@ app.get("/user", async (req, res) => {
 app.post("/user", async (req, res) => {
   const data = req.body;
   await User.add(data);
-//   const user_id = req.body.id_user;
+  //   const user_id = req.body.id_user;
   res.send({ data });
 });
 
-app.put("/user", async (req, res) => {
+app.post("/edituser", async (req, res) => {
   try {
-    const user_id = req.body.user_id;
-    console.log(req.body.user_id);
-    delete req.body.user_id;
+    const user_id = req.body.id_user;
+    delete user_id;
     const data = req.body;
+    console.log(data);
     await User.doc(user_id).update(data);
     res.send({ Result: "User updated Successfully" });
   } catch (error) {
