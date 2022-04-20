@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const Products = require("./config");
+const Products = require("./config_productos");
 
 const app = express();
 

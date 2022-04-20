@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const Ventas = require("./config");
-const Products = require("./config");
+const Ventas = require("./config_ventas");
+const Products = require("./config_ventas");
 
 const app = express();
 
