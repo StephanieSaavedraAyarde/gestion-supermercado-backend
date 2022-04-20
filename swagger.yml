@@ -6,30 +6,247 @@ info:
 host: "api.star.supermarket"
 basePath: "/v1"
 paths:
-  /customer:
+
+# Client Swagger
+
+# Product Swagger
+
+# Provides Swagger
+
+# Shopping Swagger
+
+# Sales Swagger
+  
+# Coupons Swagger
+  /coupon:
+    get:
+      tags:
+      - "coupons"
+      summary: "Get All Coupons"
+      description: "Gets all currently registered Coupons"
+      operationId: "getCouponsList"
+      responses:
+        200:
+          description: "Successful request - Retrieving Coupons List"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Coupon"
+    
     post:
       tags:
-      - "customer"
-      summary: "Create customer"
-      description: "This can only be done by the logged in customer."
-      operationId: "createCustomer"
+      - "coupons"
+      summary: "Create new user"
+      description: "This can only be done by the logged into the system."
+      operationId: "createUser"
       produces:
       - "application/json"
       parameters:
       - in: "body"
         name: "body"
-        description: "Created customer object"
+        description: "Created coupon object"
         required: true
         schema:
-          $ref: "#/definitions/Customer"
+          $ref: "#/definitions/Coupon"
       responses:
-        default:
-          description: "Successful operation"
-
-  /customer/login:
+        200:
+          description: "Successful request - Coupon added"
+        405:
+          description: "Error while trying to add Coupon"    
+  
+  /coupons/{couponId}:
     get:
       tags:
-      - "customer"
+      - "coupons"
+      summary: Get coupon info by Id
+      operationId: "getCouponInfo"
+      parameters:
+      
+      - in: "path"
+        name: "userId"
+        type: "integer"
+        format: "int32"
+        required: true
+      
+      responses:
+        200:
+          description: "Successful Request"
+          schema:
+            $ref: "#/definitions/Coupon"
+        404:
+          description: "Error - User Does Not Exist"
+   
+    put:
+      tags:
+      - "coupons"
+      summary: "Update a Coupon"
+  
+      description: "Allows you to update one of the following fields in a coupons. One should be updated at a time"
+      operationId: "updateCoupon"
+      
+      parameters:
+      - in: "path"
+        name: "userId"
+        description: "ID ofuser to be updated"
+        type: "integer"
+        format: "int32"
+        required: true
+            
+      - in: "query"
+        name: "field"
+        description: "field to be updated"
+        type: "string" 
+        required: true
+        
+      - in: "query"
+        name: "value"
+        description: "New value of the previous field"
+        type: "string"
+        required: true
+      
+      responses:
+        200:
+          description: "Successful Request - Coupon Updated"
+        404:
+          description: "Error - Coupon Does Not Exist"
+      
+    delete:
+      tags:
+      - "coupons"
+      summary: "Delete a coupon"
+      description: "Delete a coupon indicating his ID"
+      operationId: "deleteCoupons"
+      
+      parameters:
+      - in: "path"
+        name: "userId"
+        type: "integer"
+        format: "int32"
+        required: true
+        
+      responses:
+        200:
+          description: "Successful Request - Coupon Deleted"
+        404:
+          description: "Error - Coupon Does Not Exist"
+
+# User Swagger
+  /user:
+    get:
+      tags:
+      - "user"
+      summary: "Get All Users"
+      description: "Gets all currently registered users"
+      operationId: "getUsersList"
+      responses:
+        200:
+          description: "Successful request - Retrieving User List"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+    
+    post:
+      tags:
+      - "user"
+      summary: "Create new user"
+      description: "This can only be done by the logged into the system."
+      operationId: "createUser"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created user object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "Successful request - User added"
+        405:
+          description: "Error while trying to add user"    
+  
+  /user/{userId}:
+    get:
+      tags:
+      - "user"
+      summary: Get user info by Id
+      operationId: "getUserInfo"
+      parameters:
+      
+      - in: "path"
+        name: "userId"
+        type: "integer"
+        format: "int32"
+        required: true
+      
+      responses:
+        200:
+          description: "Successful Request"
+          schema:
+            $ref: "#/definitions/User"
+        404:
+          description: "Error - User Does Not Exist"
+   
+    put:
+      tags:
+      - "user"
+      summary: "Update User"
+  
+      description: "Allows you to update one of the following fields in an user. One should be updated at a time"
+      operationId: "updateUser"
+      
+      parameters:
+      - in: "path"
+        name: "userId"
+        description: "ID ofuser to be updated"
+        type: "integer"
+        format: "int32"
+        required: true
+            
+      - in: "query"
+        name: "field"
+        description: "field to be updated"
+        type: "string" 
+        required: true
+        
+      - in: "query"
+        name: "value"
+        description: "New value of the previous field"
+        type: "string"
+        required: true
+      
+      responses:
+        200:
+          description: "Successful Request - User Updated"
+        404:
+          description: "Error - User Does Not Exist"
+      
+    delete:
+      tags:
+      - "user"
+      summary: "Delete an user"
+      description: "Delete an user indicating his ID"
+      operationId: "deleteUser"
+      
+      parameters:
+      - in: "path"
+        name: "userId"
+        type: "integer"
+        format: "int32"
+        required: true
+        
+      responses:
+        200:
+          description: "Successful Request - User Deleted"
+        404:
+          description: "Error - User Does Not Exist"
+
+  /user/login:
+    get:
+      tags:
+      - "user"
       summary: "Logs customer into the system"
       description: "Logs user into the system with username and pass"
       operationId: "loginCustomer"
@@ -62,10 +279,10 @@ paths:
         "400":
           description: "Invalid username/password"
   
-  /customer/logout:
+  /user/logout:
     get:
       tags:
-      - "customer"
+      - "user"
       summary: "Logs out current logged in customer session"
       description: ""
       operationId: "logoutCustomer"
@@ -76,299 +293,44 @@ paths:
         default:
           description: "Successful Logout"
 
-  /customer/{id}:
-    put:
+# Reports Swagger
+  /report/{month}:
+    get:
       tags:
-      - "customer"
-      summary: "Update Customer's address"
-  
-      description: "Allows you to update address in an especific user. One should be updated at a time"
-      operationId: "updateCustomer"
-      
+      - "sales"
+      summary: Get report info by date
+      operationId: "getReportInfo"
       parameters:
       - in: "path"
-        name: "id"
-        description: "ID ofuser to be updated"
+        name: "fecha"
         type: "integer"
-        required: true
-            
-      - in: "query"
-        name: "address"
-        description: "Field to be updated"
-        type: "string"
-        required: true
-        
-      - in: "query"
-        name: "value"
-        description: "New value of the previous field"
-        type: "string"
+        format: "date"
+        description: "Fecha de la venta"
         required: true
       
-      responses:
-        202:
-          description: "Successful Request - User Updated"
-        404:
-          description: "Error - User Does Not Exist"
-    
-  /product:
-    get:
-      tags:
-      - "Product"
-      summary: "Obtiene la lista de productos"
-      description: "Lista de productos"
-      operationId: "getProduct"
-      consumes:
-      - "application/xml"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Veemos la lista de productos"
-        required: true
-        schema:
-          $ref: "#/definitions/Product"
-      responses:
-        "403":
-          description: "Forbidden"
-  
-  /product/create:
-    get:
-      tags:
-      - "Product"
-      summary: "Finds Film by Actors"
-      description: "Multiple Actors are in Multiple films"
-      operationId: "findFilmByActor"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - name: "ActorName"
-        in: "query"
-        description: "ActorName values that need to be considered for filter"
-        required: true
-        type: "array"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Product"
-        "404":
-          description: "File not found"
-      
-  /film/title={titleName}:
-    get:
-      tags:
-      - "Film"
-      summary: "Get films by title"
-      description: "Multiple titles are in multiple films"
-      operationId: "findFilmByTitle"
-      produces:
-      - "application/json"
-      parameters:
-        - name: "titleName"
-          in: "query"
-          description: "Film's title "
-          required: true
-          type: "string"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Film"
-        "404":
-          description: "File not found"
-      
-  /film/Actor={ActorName}?film={filmName}:
-    get:
-      tags:
-      - "Film"
-      summary: "Finds Film by Actors and film's name"
-      description: "Multiple Actors are in Multiple films and similarys titles for multiple films"
-      operationId: "findFilmByActorAndTitle"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "ActorName, filmName"
-        in: "query"
-        description: "ActorName values that need to be considered for filter"
-        required: true
-        type: "array"
-      responses:
-        "200":
-          description: "Successful Search"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Film"
-        "404":
-          description: "File not found"
-
-  /cart:
-    get:
-      tags:
-      - "Cart"
-      summary: "Retrieve cart"
-      description: "Retrieve a list of all the items pending in your cart."
-      operationId: "getAllItems"
-      produces:
-      - "application/json"
-      
-      responses:
-        202:
-          description: "Successful Request - Retrieving items in Cart"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Film"
-    
-    post:
-      tags:
-      - "Cart"
-      summary: "Add new item in the cart"
-      description: " User indicates the Movie to add a new item in his cart"
-      operationId: "addItem"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-        - in: "query"
-          name: "name"
-          type: "string"
-          required: true
-
-        - in: "query"
-          name: "quantity"
-          description: "quantity of items to buy"
-          type: "number"
-          format: "double"
-          required: true
-          
-        - in: "query"
-          name: "price"
-          description: "Price of each item"
-          type: "number"
-          format: "double"
-          required: true
-          
-        - in: "query"
-          name: "discount"
-          description: "Discount on percentage rate"
-          type: "number"
-          format: "double"
-          required: true
-        
       responses:
         200:
-          description: "Successful Request - Item added to Cart"
-        405:    
-          description: "Failed Request"
-
-    delete:
-      tags:
-      - "Cart"
-      summary: "Reset your cart"
-      description: "Deletes all items in an existing cart."
-      operationId: "deleteAll"
-      produces:
-      - "application/json"
-      
-      responses:
-        202:
-          description: "Successful request - Cart has been reset."
-        401:
-          description: "Unauthorized to make such call."
-        500:
-          description: "Error while trying to reset. Try again."
-
-  /cart/{film_id}:    
-    delete:
-      tags:
-      - "Cart"
-      summary: "Delete an item"
-      description: "Deletes an item from the current cart."
-      operationId: "deleteItem"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      
-      - in: "query"
-        name: "cart_Id"
-        description: "Id of a customer's cart"
-        type: "integer"
-        required: true
-        
-      - in: "path"
-        name: "film_id"
-        description: "Id of item to be deleted"
-        type: "integer"
-        required: true
-      responses:
-        202:
-          description: "Successful Request - Item deleted"
+          description: "Successful Request"
+          schema:
+            $ref: "#/definitions/Sales"
         404:
-          description: "Error - Item not found"
+          description: "Error -  Sales Does Not Exist"
 
-  /payment:
-    post:
-      tags:
-      - "Rental and Payment"
-      summary: "Register Payment"
-      description: "Checkout cart"
-      operationId: "registerPayment"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Created payment object"
-        required: true
-        schema:
-          $ref: "#/definitions/Payment"
-      responses:
-        default:
-          description: "Successful operation"
-
-  /Rental:
-    post:
-      tags:
-      - "Rental and Payment"
-      summary: "Register Rental"
-      description: "Checkout cart"
-      operationId: "registerRental"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Created rental object"
-        required: true
-        schema:
-          $ref: "#/definitions/Rental"
-      responses:
-        default:
-          description: "Successful operation"
-
+# Security Attributes
 securityDefinitions:
   petstore_auth:
     type: "oauth2"
-    authorizationUrl: "http://api.sakila/oauth/dialog"
+    authorizationUrl: "http://star-supermarket/oauth/dialog"
     flow: "implicit"
     scopes:
-      write:pets: "Modify films in your account"
-      read:pets: "Read your Films"
+      write:pets: "Modify fdata in your account"
+      read:pets: "Read your data"
   api_key:
     type: "apiKey"
     name: "api_key"
     in: "header"
 
+# Models (Definitions)
 definitions:
   Customer: 
     type: "object"
@@ -388,7 +350,9 @@ definitions:
       telf:
         type: "string"
         description: "Numero de telefono del cliente"
-     
+      estado:
+        type: "integer"
+        description: "Estado de activo e inactivo" 
       
   Product:
     type: "object"
@@ -418,13 +382,13 @@ definitions:
         description: "Precio de compra con los proveedores"
       estado:
         type: "integer"
-        description: "Estado de activo y desactivado"
+        description: "Estado de activo e inactivo" 
       fecha_vencimiento:
         type: "integer"
         format: "date"
         description: "Fecha de vencimiento del producto"
 
-  Provider:
+  Provvider:
     type: "object"
     properties:
       id_proveedor:
@@ -447,7 +411,7 @@ definitions:
         description: "Numero de telefono del proveedor"
       estado:
         type: "integer"
-        description: "Estado de activo y desactivado"  
+        description: "Estado de activo e inactivo"  
   
   User: 
     type: "object"
@@ -467,7 +431,7 @@ definitions:
         format: "date-time"
         description: "Fecha de Acceso"
 
-  Ventas: 
+  Sales: 
     type: "object"
     properties:
       id_ventas:
@@ -475,12 +439,51 @@ definitions:
         description: "Identificador de la venta"
       ci_cliente:
         type: "string"
-        description: "Identificador de cliente para linkear módulos"
+        description: "Identificador de cliente para hacer el match con la venta"
       productos:
         type: "array"
         description: "Array de Productos vendidos"
       total:
         type: "number"
         description: "Monto total de la venta"
+      estado:
+        type: "integer"
+        description: "Estado de activo e inactivo" 
+      fecha:
+        type: "integer"
+        format: "date"
+        description: "Fecha de la venta"
 
-      
+  Coupon: 
+    type: "object"
+    properties:
+      id_cupon:
+        type: "string"
+        description: "Identificador del cupon"
+      nombre:
+        type: "string"
+        description: "Nombre al cual se atribuye el cupon"
+      porcentaje:
+        type: "integer"
+        description: "Porcentaje a descontar del monto total"
+      cantidad:
+        type: "integer"
+        description: "Cantidad de coupones con estas caracterisiticas"
+      fecha_límite:
+        type: "integer"
+        format: "date"
+        description: "Fecha de vencimiento del cupon"
+      estado:
+        type: "integer"
+        description: "Estado de activo e inactivo" 
+
+
+# Swagger To Do
+    # CLIENTES    -->   Modelo:✅ | Endpoints:
+    # PRODUCTOS   -->   Modelo:✅ | Endpoints:
+    # PROVEEDORES -->   Modelo:✅ | Endpoints:
+    # COMPRAS     -->   Modelo: - | Endpoints:
+    # VENTAS      -->   Modelo:✅ | Endpoints:
+    # CUPONES     -->   Modelo:✅ | Endpoints:✅
+    # USUARIOS    -->   Modelo:✅ | Endpoints:✅
+    # REPORTES    -->   Modelo: - | Endpoints:✅

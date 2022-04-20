@@ -3,10 +3,15 @@ const cors = require("cors");
 const Ventas = require("./config_ventas");
 const Products = require("./config_ventas");
 
+const http = require('http')
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger_output.json')
+
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 app.get("/ventas", async (req, res) => {
   const snapshot = await Ventas.get();
