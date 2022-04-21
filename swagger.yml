@@ -407,7 +407,7 @@ paths:
   /report/{month}:
     get:
       tags:
-      - "sales"
+      - "Report"
       summary: Get report info by date
       operationId: "getReportInfo"
       parameters:
@@ -425,7 +425,192 @@ paths:
             $ref: "#/definitions/Sales"
         404:
           description: "Error -  Sales Does Not Exist"
+  /cart:
+    
+    post:
+      tags:
+      - "Sales"
+      summary: "Add new item in the cart"
+      description: " User indicates the Shopping Service to add a new item in his cart"
+      operationId: "Sales"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "query"
+          name: "name"
+          type: "string"
+          required: true
 
+        - in: "query"
+          name: "quantity"
+          description: "quantity of items to buy"
+          type: "number"
+          format: "double"
+          required: true
+          
+        - in: "query"
+          name: "price"
+          description: "Price of each item"
+          type: "number"
+          format: "double"
+          required: true
+          
+        - in: "query"
+          name: "discount"
+          description: "Discount on percentage rate"
+          type: "number"
+          format: "double"
+          required: true
+        
+      responses:
+        200:
+          description: "Successful Request - Item(s) added to Cart"
+        405:    
+          description: "Failed Request - Invalid Inputs"
+
+   
+    get:
+      tags:
+      - "Sales"
+      summary: "Retrieve all items"
+      description: "Retrieve a list of all the items pending in your cart."
+      operationId: "getAllItems"
+      produces:
+      - "application/json"
+      
+      responses:
+        202:
+          description: "Successful Request - Retrieving items in Cart"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Sales"
+    
+    delete:
+      tags:
+      - "Sales"
+      summary: "Reset your cart"
+      description: "Deletes all items in an existing cart."
+      operationId: "deleteAll"
+      produces:
+      - "application/json"
+      
+      responses:
+        202:
+          description: "Successful request - Cart has been reset."
+        401:
+          description: "Unauthorized to make such call."
+        500:
+          description: "Error while trying to reset. Try again."
+
+  /cart/{itemId}:
+    get:
+      tags:
+      - "Sales"
+      summary: "Retrieve an Item"
+      description: "Retrieves a Item object with relevant info about a certain item in a cart."
+      operationId: "getItem"
+      produces:
+      - "application/json"
+      parameters:
+      
+      - in: "query"
+        name: "cartId"
+        description: "Id of an users' cart"
+        type: "integer"
+        format: "int32"
+        required: true
+      
+      - in: "path"
+        name: "itemId"
+        description: "Id of item to return"
+        type: "integer"
+        format: "int32"
+        required: true
+      
+      responses:
+        200:
+          description: "Successful request - Item Retrieved"
+          schema:
+            $ref: "#/definitions/Sales"
+        404:
+          description: "Item not found"
+        405: 
+          description: "Failed request - item or cart not found"
+            
+    delete:
+      tags:
+      - "Sales"
+      summary: "Delete an item"
+      description: "Deletes an item from the current cart."
+      operationId: "deleteItem"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      
+      - in: "query"
+        name: "cartId"
+        description: "Id of an users' cart"
+        type: "integer"
+        format: "int32"
+        required: true
+        
+      - in: "path"
+        name: "itemId"
+        description: "Id of item to be deleted"
+        type: "integer"
+        format: "int32"
+        required: true
+      responses:
+        202:
+          description: "Successful Request - Item deleted"
+        404:
+          description: "Error - Item not found"
+
+    put:
+      tags:
+      - "Sales"
+      summary: "Update item"
+  
+      description: "Allows you to update one of the following fields in an item: quantity, price, discount. One should be updated at a time"
+      operationId: "updateItem"
+      
+      parameters:
+      - in: "path"
+        name: "itemId"
+        description: "ID of item to be updated"
+        type: "integer"
+        format: "int32"
+        required: true
+            
+      - in: "query"
+        name: "field"
+        description: "field to be updated (quantity/price/discount)"
+        type: "string"
+        required: true
+        
+      - in: "query"
+        name: "value"
+        description: "New value of the previous field"
+        type: "number"
+        format: "double"
+        required: true
+      
+      responses:
+        202: 
+          description: "Sucessful Request - Item Updated"
+        404:
+          description: "Error - Item not found"
+
+        405: 
+          description: "Wrong input"
+          schema:
+            type: "string"
+            example: "Cannot add that much quantity! Not enough in stock."
 # Security Attributes
 securityDefinitions:
   petstore_auth:
@@ -564,7 +749,9 @@ definitions:
         format: "date"
         description: "Fecha de la venta"
 
+  
 
+  
 
 
 # Swagger To Do
