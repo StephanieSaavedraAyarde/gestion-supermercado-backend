@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const Provedores = require("./config_provider.js");
+const Provedores = require("./config_provider");
 
 const app = express();
 
@@ -45,7 +45,7 @@ app.delete("/provider", async (req, res) => {
   console.log(req.body.id_proveedor);
   delete req.body.id_proveedor;
   const data = {
-    estate: 0,
+    state: 0,
   };
   await Provedores.doc(id_proveedor).update(data);
   res.send({ Result: "Provider deleted Successfully" });

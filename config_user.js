@@ -14,7 +14,7 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-const Products = db.collection("Products");
 
+const Provedores = db.collection("User");
 
-module.exports = Products;
+module.exports = Provedores;
