@@ -14,6 +14,11 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-const Provedores = db.collection("Provider");
+const Provider = db.collection("Provider");
+const User = db.collection("User");
+const Customer = db.collection('Cliente')
+const Product = db.collection('Products')
+const Sale = db.collection('Ventas')
 
-module.exports = Provedores;
+module.exports = {Provider, User, Customer, Product, Sale}
+
