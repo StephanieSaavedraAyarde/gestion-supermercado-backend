@@ -3,7 +3,6 @@ const router = express.Router();
 const { Provider } = require("../config/config_test");
 
 //PROVIDER
-
 router.get("/", async (req, res) => {
   const snapshot = await Provider.get();
   const list = snapshot.docs.map((doc) => ({
@@ -15,7 +14,6 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const data = req.body;
-
   await Provider.add(data);
   const datai = req.body.id_proveedor;
   res.send({ data });
@@ -29,7 +27,7 @@ router.put("/", async (req, res) => {
     delete req.body.id_proveedor;
     const data = req.body;
     await Provider.doc(id_proveedor).update(data);
-    res.send({ Result: "Provider updated Successfully" });
+    res.send({ Result: "Provider was updated Successfully" });
   } catch (error) {
     console.log(error);
   }
@@ -43,7 +41,7 @@ router.delete("/", async (req, res) => {
     state: 0,
   };
   await Provider.doc(id_proveedor).update(data);
-  res.send({ Result: "Provider deleted Successfully" });
+  res.send({ Result: "Provider was deleted Successfully" });
 });
 
 module.exports = router;
