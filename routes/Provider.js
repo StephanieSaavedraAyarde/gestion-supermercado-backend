@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
   res.send({ data });
   console.log(datai);
 });
-
+//Editado de proveedores
 router.put("/", async (req, res) => {
   try {
     const id_proveedor = req.body.id_proveedor;
