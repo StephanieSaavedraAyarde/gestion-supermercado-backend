@@ -30,7 +30,7 @@ router.put("/", async (req, res) => {
     console.log(error);
   }
 });
-
+//Borrado de usuario
 router.delete("/", async (req, res) => {
   const user_id = req.body.id_user;
   console.log(req.body);
