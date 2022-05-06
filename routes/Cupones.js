@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
     }
  
 });
-
+//Busqueda de cupon por nomnbre
 router.get("/uniqueC", async (req, res) => {
     try {
       const cupones = req.query.cu;
