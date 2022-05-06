@@ -40,7 +40,7 @@ router.get("/uniqueC", async (req, res) => {
       res.status(404).send({ error: "Error en el Try", user: null });
     }
   });
-
+//Se elimina el cupon por id
 router.delete("/", async (req, res) => {
   const Cupon_id = req.body.id_Cupon;
   console.log(req.body);
