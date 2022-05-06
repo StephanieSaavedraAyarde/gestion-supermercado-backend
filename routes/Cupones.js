@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {Cupon} = require("../config/config_test");
 
-
+//Se obtiene el get
 router.get("/", async (req, res) => {
   const snapshot = await Cupon.get();
   const list = snapshot.docs.map((doc) => ({
