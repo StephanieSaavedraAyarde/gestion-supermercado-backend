@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
   await User.add(data);
   res.send({ data });
 });
-
+//Update de usuario
 router.put("/", async (req, res) => {
   try {
     const user_id = req.body.id_user;
