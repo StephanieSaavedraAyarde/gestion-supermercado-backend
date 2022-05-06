@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Product } = require("../config/config_test");
-
+//Lista de producto
 router.get("/", async (req, res) => {
   const snapshot = await Product.get();
   const list = snapshot.docs.map((doc) => ({
@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
   }));
   res.send(list);
 });
-
+//Post de producto
 router.post("/", async (req, res) => {
   const data = req.body;
   await Product.add(data);
