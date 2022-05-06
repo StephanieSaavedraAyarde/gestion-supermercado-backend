@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
   }));
   res.send(list);
 });
-
+//Agregar usuario
 router.post("/", async (req, res) => {
   const data = req.body;
   await User.add(data);
