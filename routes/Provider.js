@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Provider } = require("../config/config_test");
 
-//PROVIDER
+//Lista de proveedores
 router.get("/", async (req, res) => {
   const snapshot = await Provider.get();
   const list = snapshot.docs.map((doc) => ({
