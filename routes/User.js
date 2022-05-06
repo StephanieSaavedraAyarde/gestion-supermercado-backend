@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {User} = require("../config/config_test");
 
-
+//Busqueda de usuario total
 router.get("/", async (req, res) => {
   const snapshot = await User.get();
   const list = snapshot.docs.map((doc) => ({
