@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
   }));
   res.send(list);
 });
-
+//Sirve para creae
 router.post("/", async (req, res) => {
     try{
         const data = req.body;
