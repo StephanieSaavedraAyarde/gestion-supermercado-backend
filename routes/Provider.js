@@ -11,6 +11,7 @@ router.get("/", async (req, res) => {
   }));
   res.send(list);
 });
+//Post de proveedores
 
 router.post("/", async (req, res) => {
   const data = req.body;
