@@ -11,8 +11,8 @@ router.get("/", async (req, res) => {
   }));
   res.send(list);
 });
-//Post de proveedores
 
+//Post de proveedores
 router.post("/", async (req, res) => {
   const data = req.body;
   await Provider.add(data);
@@ -20,6 +20,7 @@ router.post("/", async (req, res) => {
   res.send({ data });
   console.log(datai);
 });
+
 //Editado de proveedores
 router.put("/", async (req, res) => {
   try {
@@ -33,6 +34,7 @@ router.put("/", async (req, res) => {
     console.log(error);
   }
 });
+
 //Borrado de proveedor
 router.delete("/", async (req, res) => {
   const id_proveedor = req.body.id_proveedor;

@@ -11,12 +11,14 @@ router.get("/", async (req, res) => {
   }));
   res.send(list);
 });
+
 //Agregar usuario
 router.post("/", async (req, res) => {
   const data = req.body;
   await User.add(data);
   res.send({ data });
 });
+
 //Update de usuario
 router.put("/", async (req, res) => {
   try {
@@ -30,6 +32,7 @@ router.put("/", async (req, res) => {
     console.log(error);
   }
 });
+
 //Borrado de usuario
 router.delete("/", async (req, res) => {
   const user_id = req.body.id_user;

@@ -11,6 +11,7 @@ router.get("/", async (req, res) => {
   }));
   res.send(list);
 });
+
 //Create New Coupon
 router.post("/", async (req, res) => {
   try {
@@ -21,6 +22,7 @@ router.post("/", async (req, res) => {
     console.log(e);
   }
 });
+
 //Search a coupon
 router.get("/uniqueC", async (req, res) => {
   try {
