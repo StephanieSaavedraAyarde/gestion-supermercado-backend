@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { Cupon } = require("../config/config_test");
+const { Coupon } = require("../config/config_test");
 
 //Get all Coupons
 router.get("/", async (req, res) => {
-  const snapshot = await Cupon.get();
+  const snapshot = await Coupon.get();
   const list = snapshot.docs.map((doc) => ({
-    id_Cupon: doc.id,
+    id_Coupon: doc.id,
     ...doc.data(),
   }));
   res.send(list);
@@ -16,21 +16,22 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const data = req.body;
-    await Cupon.add(data);
+    await Coupon.add(data);
     res.send({ data });
   } catch (e) {
     console.log(e);
   }
 });
 
-//Search a coupon
+//Search a Coupon
 router.get("/uniqueC", async (req, res) => {
   try {
-    const cupones = req.query.cu;
+    const Coupones = req.query.cu;
 
-    console.log(cupones);
+    console.log(Coupones);
 
-    const data = await Customer.where("cupones", "==", cupones).get();
+    const data = await Coupon.where("cupones", "==", Coupones).get();
+    console.log(data)
     const list = data.docs.map((doc) => ({
       doc_ic: doc.id,
       ...doc.data(),
@@ -42,16 +43,16 @@ router.get("/uniqueC", async (req, res) => {
   }
 });
 
-//Delete a coupon
+//Delete a Coupon
 router.delete("/", async (req, res) => {
-  const Cupon_id = req.body.id_Cupon;
+  const Coupon_id = req.body.id_Coupon;
   console.log(req.body);
-  delete req.body.id_Cupon;
+  delete req.body.id_Coupon;
   const data = {
     estado: 1,
   };
-  await Cupon.doc(Cupon_id).update(data);
-  res.send({ Result: "Cupon used Successfully" });
+  await Coupon.doc(Coupon_id).update(data);
+  res.send({ Result: "Coupon used Successfully" });
 });
 
 module.exports = router;
