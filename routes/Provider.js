@@ -33,7 +33,7 @@ router.put("/", async (req, res) => {
     console.log(error);
   }
 });
-
+//Borrado de proveedor
 router.delete("/", async (req, res) => {
   const id_proveedor = req.body.id_proveedor;
   console.log(req.body.id_proveedor);
