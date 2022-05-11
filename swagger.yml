@@ -34,13 +34,13 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: "Created Customer object"
+        description: "Created Customer Object"
         required: true
         schema:
           $ref: "#/definitions/Customer"
       responses:
         200:
-          description: "Successful request - User added"
+          description: "Successful Request - User added"
         405:
           description: "Error while trying to add user"   
   /Customer/clienteCi:

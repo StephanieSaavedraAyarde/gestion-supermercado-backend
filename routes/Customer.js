@@ -2,10 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { Customer } = require("../config/config_test");
 
-// Obtener cliente (Lista) 🚩
+// Get all clients 🚩
 router.get("/", async (req, res) => {
   try {
-    // TODOS LOS CLIENTES
     const data = await Customer.get();
     const list = data.docs.map((doc) => ({
       doc_id: doc.id,
@@ -15,7 +14,7 @@ router.get("/", async (req, res) => {
   } catch (error) {}
 });
 
-// OBTENER POR CI
+// Get by CI
 router.get("/unique", async (req, res) => {
   try {
     const user_CI = req.query.ci;
@@ -34,14 +33,14 @@ router.get("/unique", async (req, res) => {
   }
 });
 
-// AGREGAR CLIENTE
+// Add client
 router.post("/", async (req, res) => {
   const data = req.body;
   await Customer.add(data);
   res.send({ message: "Cliente agregado" });
 });
 
-// EDITAR CLIENTE
+// Update client
 router.put("/", async (req, res) => {
   try {
     const id_cliente = req.body.id_cliente;

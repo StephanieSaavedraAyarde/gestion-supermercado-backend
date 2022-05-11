@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Provider } = require("../config/config_test");
 
-//PROVIDER
+//Lista de proveedores
 router.get("/", async (req, res) => {
   const snapshot = await Provider.get();
   const list = snapshot.docs.map((doc) => ({
@@ -12,6 +12,7 @@ router.get("/", async (req, res) => {
   res.send(list);
 });
 
+//Post de proveedores
 router.post("/", async (req, res) => {
   const data = req.body;
   await Provider.add(data);
@@ -20,6 +21,7 @@ router.post("/", async (req, res) => {
   console.log(datai);
 });
 
+//Editado de proveedores
 router.put("/", async (req, res) => {
   try {
     const id_proveedor = req.body.id_proveedor;
@@ -33,6 +35,7 @@ router.put("/", async (req, res) => {
   }
 });
 
+//Borrado de proveedor
 router.delete("/", async (req, res) => {
   const id_proveedor = req.body.id_proveedor;
   console.log(req.body.id_proveedor);

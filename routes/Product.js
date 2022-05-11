@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Product } = require("../config/config_test");
 
+//Get all products
 router.get("/", async (req, res) => {
   const snapshot = await Product.get();
   const list = snapshot.docs.map((doc) => ({
@@ -11,12 +12,14 @@ router.get("/", async (req, res) => {
   res.send(list);
 });
 
+//Add product
 router.post("/", async (req, res) => {
   const data = req.body;
   await Product.add(data);
   res.send({ Result: "Product added Successfully" });
 });
 
+//update product
 router.put("/", async (req, res) => {
   try {
     const id_producto = req.body.id_producto;
@@ -30,6 +33,7 @@ router.put("/", async (req, res) => {
   }
 });
 
+//Delete product
 router.delete("/", async (req, res) => {
   const id_producto = req.body.id_producto;
   console.log(req.body.id_producto);

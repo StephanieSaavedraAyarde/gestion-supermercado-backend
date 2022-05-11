@@ -1,6 +1,6 @@
 const swaggerAutogen = require('swagger-autogen')()
 
 const outputFile = './swagger.yml'
-const endpointsFiles = ['./ventas.js']
+const endpointsFiles = ['./main.js']
 
 swaggerAutogen(outputFile, endpointsFiles)

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {User} = require("../config/config_test");
 
-
+//Busqueda de usuario total
 router.get("/", async (req, res) => {
   const snapshot = await User.get();
   const list = snapshot.docs.map((doc) => ({
@@ -12,12 +12,14 @@ router.get("/", async (req, res) => {
   res.send(list);
 });
 
+//Agregar usuario
 router.post("/", async (req, res) => {
   const data = req.body;
   await User.add(data);
   res.send({ data });
 });
 
+//Update de usuario
 router.put("/", async (req, res) => {
   try {
     const user_id = req.body.id_user;
@@ -31,10 +33,11 @@ router.put("/", async (req, res) => {
   }
 });
 
+//Borrado de usuario
 router.delete("/", async (req, res) => {
-  const user_id = req.body.user_id;
-  console.log(req.body.user_id);
-  delete req.body.user_id;
+  const user_id = req.body.id_user;
+  console.log(req.body);
+  delete req.body.id_user;
   const data = {
     state: 0,
   };

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Product, Sale } = require("../config/config_test");
 
+// Get all sales
 router.get("/ventas", async (req, res) => {
   const snapshot = await Sale.get();
   const list = snapshot.docs.map((doc) => ({
@@ -34,13 +35,14 @@ router.get("/ventas", async (req, res) => {
 //   } catch (error) {}
 // });
 
-// Sale sin actualizar stock
+// Add Sale - No Stock
 router.post("/venta", async (req, res) => {
   let data = req.body;
   await Sale.add(data);
-  res.send({ Result: "venta Registrada" });
+  res.send({ Result: "Added Successfully" });
 });
 
+// Update Sale
 router.put("/ventas", async (req, res) => {
   try {
     const id_venta = req.body.id_venta;
@@ -54,6 +56,7 @@ router.put("/ventas", async (req, res) => {
   }
 });
 
+// Delete sale
 router.delete("/ventas", async (req, res) => {
   let id_venta = req.body.id_venta;
   console.log(req.body.id_venta);
