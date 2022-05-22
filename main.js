@@ -13,7 +13,9 @@ const testRoute = require("./routes/Test");
 const productRoute = require("./routes/Product");
 const providerRoute = require("./routes/Provider");
 const saleRoute = require("./routes/Sale");
-const couponRoute= require("./routes/Coupon");
+const couponRoute = require("./routes/Coupon");
+const reportRoute = require("./routes/Report");
+
 
 app.use("/user", userRoute);
 app.use("/customer", customerRoute);
@@ -22,6 +24,7 @@ app.use("/product", productRoute);
 app.use("/provider", providerRoute);
 app.use("/sale", saleRoute);
 app.use("/coupon",couponRoute);
+app.use("/report", reportRoute);
 
 app.use(express.json());
 

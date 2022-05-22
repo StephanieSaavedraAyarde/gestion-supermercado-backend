@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Customer } = require("../config/config_test");
+const { Customer, Provider } = require("../config/config_test");
 
 // Get all clients 🚩
 router.get("/", async (req, res) => {

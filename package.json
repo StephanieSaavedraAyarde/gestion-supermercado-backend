@@ -6,7 +6,7 @@
   "dependencies": {
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
-    "express": "^4.17.3",
+    "express": "^4.18.1",
     "firebase": "^8.6.8",
     "nodemon": "^2.0.7",
     "swagger-autogen": "^2.21.1",
