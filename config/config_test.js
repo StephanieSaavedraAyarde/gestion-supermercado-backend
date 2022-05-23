@@ -13,6 +13,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
+const Auth = firebase.auth();
+
 
 const Provider = db.collection("Provider");
 const User = db.collection("User");
@@ -21,4 +23,4 @@ const Product = db.collection("Products");
 const Sale = db.collection("Ventas");
 const Coupon = db.collection("Cupon");
 
-module.exports = { Provider, User, Customer, Product, Sale, Coupon };
+module.exports = { Provider, User, Customer, Product, Sale, Coupon, Auth };
