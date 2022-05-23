@@ -12,28 +12,6 @@ router.get("/ventas", async (req, res) => {
   res.send(list);
 });
 
-// router.post("/ventas", async (req, res) => {
-//   // let id  = req.body.productos.id;
-//   // let cantidad = [];
-//   // cantidad = req.body.productos.cantidad;
-//   let data = req.body;
-//   // let cupon = req.body.idCupon;
-//   let total = req.body.total;
-
-//   try {
-//     const productos = await Products.where('id', '==', id).get();
-//     productos.forEach((prod) => {
-//       prod.stock = prod.stock - prod.cantidad;
-//      });
-
-//     if(!productos.exists){
-//       res.status(400).send({ Result: "Producto no encontrado" });
-//     }else{
-//       await Sale.add(data);
-//       res.send({ Result: "Added Successfully" });
-//     }
-//   } catch (error) {}
-// });
 
 // Add Sale - No Stock
 router.post("/venta", async (req, res) => {
