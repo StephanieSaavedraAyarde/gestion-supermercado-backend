@@ -16,8 +16,8 @@ router.get("/provider", async (req, res) => {
 router.get("/product", async (req, res) => {
   try{
     const snapshot = await Product.get();
-    const totalp = snapshot.size;
-    res.send({ totalp });
+    const total = snapshot.size;
+    res.send({ total });
   }
   catch(error){
     console.log(error);
@@ -72,11 +72,11 @@ router.get("/total", async (req, res) => {
   const querySnapshot = await Sale.get();
   const documents = querySnapshot.docs;
   let total = 0;
-  for (const doc of documents) {
+  for(const doc of documents){
       total += doc.get('total');
   }
   res.send({ total });
-  console.log("TOTAL"+total);
+  console.log("TOTAL: "+total);
 });
 
 module.exports = router;
