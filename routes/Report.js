@@ -12,6 +12,7 @@ router.get("/provider", async (req, res) => {
     }
 
 });
+
 router.get("/product", async (req, res) => {
     try {
         const snapshot = await Product.get();
@@ -22,6 +23,7 @@ router.get("/product", async (req, res) => {
     }
 
 });
+
 router.get("/user", async (req, res) => {
     try {
         const snapshot = await User.get();
@@ -32,6 +34,7 @@ router.get("/user", async (req, res) => {
     }
 
 });
+
 router.get("/coupon", async (req, res) => {
     try {
         const snapshot = await Coupon.get();
@@ -42,6 +45,7 @@ router.get("/coupon", async (req, res) => {
     }
 
 });
+
 router.get("/customer", async (req, res) => {
     try {
         const snapshot = await Customer.get();
@@ -78,25 +82,5 @@ router.get("/total", async (req, res) => {
 
 
 });
-
-// router.get("/provider", async (req, res) => {
-//   const snapshot = await Provider.get();
-//   const list = snapshot.docs.map((doc) => ({
-//     id_proveedor: doc.id,
-//     ...doc.data(),
-//   }));
-//   res.send(list.size);
-//   console.log('List.size', list.size);
-// });
-
-// router.get("/sales", async (req, res) => {
-//   newsRef.on("Ventas", function(snapshot) {
-//     var sum = 0;
-//     snapshot.forEach(function(childSnapshot) {
-//       sum += (childSnapshot.val().sth);
-//     });
-//   console.log('Total '+sum);
-//   })
-// });
 
 module.exports = router;
