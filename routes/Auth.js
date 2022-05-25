@@ -9,31 +9,14 @@ router.post("/login", async (req, res) => {
   console.log(data);
 
   Auth.signInWithEmailAndPassword(data.email, data.pass)
-    .catch(function (error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      if (errorCode === "auth/wrong-password") {
-        console.log("Wrong password.");
-      } else {
-        console.log(errorMessage);
-      }
-      if (error) {
-        res.status(400);
-        final = error;
-      } else {
-        res.status(200);
-        final = "Todo va bien";
-      }
+    .then((user) => {
+      final = user;
+      res.send(final);
     })
-    .then(function (error) {
-      if (!error) {
-        res.status(200);
-        final = "Todo va bien";
-      }
+    .catch((error) => {
+      final = error;
+      res.send(final);
     });
-
-    res.send(final)
 });
 
 //VerificarToken
