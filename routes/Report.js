@@ -97,15 +97,65 @@ router.get("/categorias", async (req, res) => {
   res.send({ counts });
 });
 
+//get by date
+router.get("/vencido", async (req, res) => {
+  const snapshot = await Product.get();
+  const documents = snapshot.docs;
+  var dates = [];
+  var total = 0;
+
+  for (const doc of documents) {
+    dates.push(doc.get("fecha_vencimiento"));
+
+    try {
+      if (
+        doc.get("fecha_vencimiento") === "2022-06-01" ||
+        doc.get("fecha_vencimiento") <= "2022-06-01"
+      ) {
+        total += 1;
+      }
+    
+    } catch (error) {
+      console.log(errpr);
+    }
+  }
+
+  res.send({ total });
+});
+
 
 //get by date
+router.get("/nostock", async (req, res) => {
+  const snapshot = await Product.get();
+  const documents = snapshot.docs;
+  var dates = [];
+  var total = 0;
+
+  for (const doc of documents) {
+    dates.push(doc.get("stock"));
+
+    try {
+      if (
+        
+        doc.get("stock") <= 30
+      ) {
+        total += 1;
+      }
+  
+    } catch (error) {
+      console.log(errpr);
+    }
+  }
+
+  res.send({ total });
+});
+
 router.get("/date", async (req, res) => {
   const snapshot = await Sale.get();
   const documents = snapshot.docs;
   var dates = [];
   var total = {};
   var precios = [];
-  
 
   for (const doc of documents) {
     dates.push(doc.get("date"));
@@ -127,5 +177,3 @@ router.get("/date", async (req, res) => {
 });
 
 module.exports = router;
-
-
