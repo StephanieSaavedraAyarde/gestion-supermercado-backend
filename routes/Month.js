@@ -19,5 +19,20 @@ router.post("/", async (req, res) => {
   res.send({ data });
 });
 
+//Update
+
+router.put("/", async (req, res) => {
+    try {
+      const month_id = req.body.id_month;
+      delete month_id ;
+      const data = req.body;
+      console.log(data);
+      await Month.doc(month_id ).update(data);
+      res.send({ Result: "Month  updated Successfully" });
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
 
 module.exports = router;
