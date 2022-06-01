@@ -2,4 +2,4 @@
 GET http://localhost:4080
 
 ### 
-GET http://localhost:4080/provider
+GET http://localhost:4080/report/categorias/1

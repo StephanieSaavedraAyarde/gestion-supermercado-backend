@@ -79,4 +79,20 @@ router.get("/total", async (req, res) => {
   console.log("TOTAL: "+total);
 });
 
+router.get("/categoria", async (req, res) => {
+  const querySnapshot = await Product.get();
+  const documents = querySnapshot.docs;
+  for(const doc of documents){
+    categorias[doc] += doc.get('categorias');
+  }
+
+  var counts = {}
+  for(var i = 0; i< categorias.length; i++) {
+    var num = arr[i];
+    counts[num] = counts[num] ? counts[num]+1 : 1;
+  }
+  console.log(keys(counts));
+
+});
+
 module.exports = router;
