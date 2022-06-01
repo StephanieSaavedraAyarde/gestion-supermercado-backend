@@ -103,14 +103,16 @@ router.get("/vencido", async (req, res) => {
   const documents = snapshot.docs;
   var dates = [];
   var total = 0;
+  let date = new Date();
+
 
   for (const doc of documents) {
     dates.push(doc.get("fecha_vencimiento"));
 
     try {
       if (
-        doc.get("fecha_vencimiento") === "2022-06-01" ||
-        doc.get("fecha_vencimiento") <= "2022-06-01"
+        doc.get("fecha_vencimiento") === date.toISOString().split('T')[0] ||
+        doc.get("fecha_vencimiento") <= date.toISOString().split('T')[0]
       ) {
         total += 1;
       }
