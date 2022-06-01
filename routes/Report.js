@@ -79,21 +79,21 @@ router.get("/total", async (req, res) => {
   console.log("TOTAL: "+total);
 });
 
-router.get("/categoria", async (req, res) => {
+router.get("/categorias", async (req, res) => {
   const querySnapshot = await Product.get();
   const documents = querySnapshot.docs;
-  for(const doc of documents){
-    categorias[doc] += doc.get('categorias'); //Dudas en la generación del array
-  }
-
+  var categorias = [];
   var counts = {}
+  for(const doc of documents){
+      categorias.push((doc.get('categoria')));
+  }
   for(var i = 0; i< categorias.length; i++) {
-    var num = arr[i];
+    console.log('Item',i,' :',categorias[i]);
+    var num = categorias[i];
     counts[num] = counts[num] ? counts[num]+1 : 1;
   }
-  console.log(keys(counts));
-  orden = counts.sort(); //Dudas en el orden del array resultante
-  res.send({ orden });
+  console.log(counts);
+  res.send({ counts });
 });
 
 module.exports = router;
