@@ -97,6 +97,7 @@ router.get("/categorias", async (req, res) => {
   res.send({ counts });
 });
 
+
 //get by date
 router.get("/date", async (req, res) => {
   const snapshot = await Sale.get();
@@ -126,3 +127,5 @@ router.get("/date", async (req, res) => {
 });
 
 module.exports = router;
+
+

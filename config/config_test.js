@@ -14,12 +14,8 @@ const firebaseConfig = {
 //Firebase Object Initialization
 firebase.initializeApp(firebaseConfig);
 
-
-
 const db = firebase.firestore();
 const Auth = firebase.auth();
-
-
 
 const Provider = db.collection("Provider");
 const User = db.collection("User");
