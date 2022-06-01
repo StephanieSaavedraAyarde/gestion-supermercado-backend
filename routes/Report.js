@@ -79,6 +79,19 @@ router.get("/total", async (req, res) => {
   console.log("TOTAL: "+total);
 });
 
+//get by date
+router.get("/date", async (req, res) => {
+  const snapshot = await Sale.get();
+  const list = snapshot.docs.map((doc) => ({
+    id_venta: doc.id,
+    total:doc.data().total,
+    date:doc.data().date
+    
+  }));
+  res.send(list);
+});
+
+
 
 
 module.exports = router;
