@@ -46,4 +46,6 @@ router.delete("/ventas", async (req, res) => {
   res.send({ Result: "Deleted Successfully" });
 });
 
+
+
 module.exports = router;

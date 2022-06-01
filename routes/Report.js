@@ -79,6 +79,7 @@ router.get("/total", async (req, res) => {
   console.log("TOTAL: "+total);
 });
 
+<<<<<<< HEAD
 router.get("/categoria", async (req, res) => {
   const querySnapshot = await Product.get();
   const documents = querySnapshot.docs;
@@ -94,5 +95,21 @@ router.get("/categoria", async (req, res) => {
   console.log(keys(counts));
 
 });
+=======
+//get by date
+router.get("/date", async (req, res) => {
+  const snapshot = await Sale.get();
+  const list = snapshot.docs.map((doc) => ({
+    id_venta: doc.id,
+    total:doc.data().total,
+    date:doc.data().date
+    
+  }));
+  res.send(list);
+});
+
+
+
+>>>>>>> 3d4386ea6bc4f93bfd54815e2b0a699d191cfbfa
 
 module.exports = router;

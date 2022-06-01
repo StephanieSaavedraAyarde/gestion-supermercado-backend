@@ -17,6 +17,7 @@ const couponRoute = require("./routes/Coupon");
 const reportRoute = require("./routes/Report");
 const authRoute = require("./routes/Auth");
 
+
 app.use("/user", userRoute);
 app.use("/customer", customerRoute);
 app.use("/test", testRoute);
@@ -26,6 +27,7 @@ app.use("/sale", saleRoute);
 app.use("/coupon", couponRoute);
 app.use("/report", reportRoute);
 app.use("/auth", authRoute);
+
 
 app.use(express.json());
 
