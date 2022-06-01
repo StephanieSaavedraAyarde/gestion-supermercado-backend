@@ -79,12 +79,11 @@ router.get("/total", async (req, res) => {
   console.log("TOTAL: "+total);
 });
 
-<<<<<<< HEAD
 router.get("/categoria", async (req, res) => {
   const querySnapshot = await Product.get();
   const documents = querySnapshot.docs;
   for(const doc of documents){
-    categorias[doc] += doc.get('categorias');
+    categorias[doc] += doc.get('categorias'); //Dudas en la generación del array
   }
 
   var counts = {}
@@ -93,23 +92,8 @@ router.get("/categoria", async (req, res) => {
     counts[num] = counts[num] ? counts[num]+1 : 1;
   }
   console.log(keys(counts));
-
+  orden = counts.sort(); //Dudas en el orden del array resultante
+  res.send({ orden });
 });
-=======
-//get by date
-router.get("/date", async (req, res) => {
-  const snapshot = await Sale.get();
-  const list = snapshot.docs.map((doc) => ({
-    id_venta: doc.id,
-    total:doc.data().total,
-    date:doc.data().date
-    
-  }));
-  res.send(list);
-});
-
-
-
->>>>>>> 3d4386ea6bc4f93bfd54815e2b0a699d191cfbfa
 
 module.exports = router;
