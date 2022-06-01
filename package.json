@@ -15,7 +15,7 @@
     "swagger-ui-express": "^4.3.0"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node main.js",
     "swagger-autogen": "node swagger.js"
   },
   "author": "",

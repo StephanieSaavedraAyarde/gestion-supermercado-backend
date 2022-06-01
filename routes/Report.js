@@ -79,4 +79,6 @@ router.get("/total", async (req, res) => {
   console.log("TOTAL: "+total);
 });
 
+
+
 module.exports = router;

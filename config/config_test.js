@@ -27,5 +27,7 @@ const Customer = db.collection("Cliente");
 const Product = db.collection("Products");
 const Sale = db.collection("Ventas");
 const Coupon = db.collection("Cupon");
+const Month = db.collection("MonthV");
 
-module.exports = { Provider, User, Customer, Product, Sale, Coupon, Auth };
+
+module.exports = { Provider, User, Customer, Product, Sale, Coupon, Auth, Month };
