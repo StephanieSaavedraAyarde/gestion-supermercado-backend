@@ -13,10 +13,15 @@ router.post("/login", async (req, res) => {
   Auth.signInWithEmailAndPassword(data.email, data.pass)
     .then((user) => {
       final = user;
+      final.code = 200;
       res.send(final);
     })
     .catch((error) => {
       final = error;
+      final.message = final.code
+      final.code = 403;
+      console.log("Error");
+
       res.send(final);
     });
 });
